@@ -5,7 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { Header,Button } from 'react-native-elements';
+
 import Icon from 'react-native-vector-icons/Entypo';
 
 export default class App extends Component {
@@ -15,6 +15,9 @@ export default class App extends Component {
         <Text style={styles.title}>
           Home
         </Text>
+        {/* <Button variant="raised" color="primary">
+          Create Hotspot
+        </Button> */}
       </View>
     );
   }

@@ -5,9 +5,9 @@ import {
   Text,
   View
 } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
 
 import {StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
+import Icon from 'react-native-vector-icons/Entypo';
 
 import Home from './screens/Home'
 import Profile from './screens/Profile'
