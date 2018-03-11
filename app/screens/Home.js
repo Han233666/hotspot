@@ -15,9 +15,6 @@ export default class App extends Component {
         <Text style={styles.title}>
           Home
         </Text>
-        {/* <Button variant="raised" color="primary">
-          Create Hotspot
-        </Button> */}
       </View>
     );
   }
@@ -37,4 +34,7 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     margin: 10,
   },
+  button: {
+
+  }
 });
