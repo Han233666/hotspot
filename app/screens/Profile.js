@@ -14,6 +14,7 @@ export default class App extends Component {
     this.state = {
       first:'firstname',
       last:'lastname',
+      email:'email@email.com',
     };
   }
 
@@ -30,6 +31,9 @@ export default class App extends Component {
         <Text style={styles.name}>
           {this.state.first} {this.state.last}
         </Text>
+        <Text style={styles.email}>
+          {this.state.email}
+        </Text>
         </View>
       </View>
     );
@@ -45,6 +49,13 @@ const styles = StyleSheet.create({
     fontSize: 35,
     textAlign: 'center',
     fontWeight: "700",
+    color: '#ffffff',
+    margin: 10,
+  },
+  email: {
+    fontSize: 25,
+    textAlign: 'center',
+    fontWeight: "400",
     color: '#ffffff',
     margin: 10,
   },
