@@ -67,8 +67,8 @@ const Tabs = TabNavigator({
   },
 }, {
   tabBarOptions: {
-    activeTintColor: '#000',
-    inactiveTintColor: '#999999',
+    activeTintColor: '#ffc048',
+    inactiveTintColor: '#fff',
     labelStyle: {
       fontSize: 12,
     },
