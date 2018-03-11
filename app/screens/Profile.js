@@ -5,7 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { Header,Button } from 'react-native-elements';
+import { Header,Button,Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
 export default class App extends Component {
@@ -20,7 +20,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.outerContainer}>
       <Header
           leftComponent={{ }}
           centerComponent={{ text: 'Profile', style: { color: '#fff', fontSize: 20 } }}
@@ -31,6 +31,13 @@ export default class App extends Component {
         <Text style={styles.name}>
           {this.state.first} {this.state.last}
         </Text>
+        <Avatar 
+          large
+          rounded
+          source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"}}
+          onPress={() => console.log("Works!")}
+          activeOpacity={0.7}
+        />
         <Text style={styles.email}>
           {this.state.email}
         </Text>
@@ -41,8 +48,13 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+    backgroundColor: '#ffdd59',
+  },
   container: {
     flex: 1,
+    alignItems: 'center',
     backgroundColor: '#ffdd59',
   },
   name: {
