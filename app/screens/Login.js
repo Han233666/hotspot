@@ -3,20 +3,24 @@ import {
   Platform,
   StyleSheet,
   Text,
+  TextInput,
   View
 } from 'react-native';
 import { Header,Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
-export default class App extends Component {
+export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
-          Hotspot
+          Hotspot Login
         </Text>
+        <TextInput placeholder='Username' />
+        <TextInput placeholder='Password' />
         <Button
-          title="Get Started"
+          onPress={this.props.onLoginPress}
+          title="Get Started!"
           textStyle={{ fontWeight: "700" }}
           buttonStyle={{
             backgroundColor: "#ff5e57",
