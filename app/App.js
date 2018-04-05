@@ -20,17 +20,8 @@ export default class App extends Component {
     };
   }
 
-  state = {
-      isLoggedIn: false
-    }
-
   render() {
-    if (this.state.isLoggedIn)
-      return <Tabs />;
-    else
-      return <Login
-          onLoginPress={() => this.setState({isLoggedIn: true})}
-        />;
+    return <Login />;
   }
 }
 
