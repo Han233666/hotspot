@@ -1,16 +1,17 @@
-var mysql      = require('mysql');
+var mysql = require('mysql');
 var db = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '',
   database : 'hotspot'
 });
-db.connect(function(err){
-if(!err) {
-    console.log("Database is connected ... nn");
-} else {
-    console.log("Error connecting database ... nn");
-}
+
+db.connect(function(error){
+  if(!error) {
+    console.log("Database is connected.");
+  } else {
+    console.log("Error connecting to database.");
+  }
 });
 
 exports.register = function(req,res){
@@ -19,18 +20,15 @@ exports.register = function(req,res){
     "password":req.body.password,
   }
   db.query('INSERT INTO users SET ?',users, function (error, results) {
-  if (error) {
-    console.log("error ocurred",error);
+  if(error) {
+    console.log("error occurred",error);
     res.send({
-      "code":400,
-      "message":"error ocurred"
+      "message":"error occurred"
     })
-  }else{
-    console.log('The solution is: ', results);
+  } else{
     res.send({
-      "code":200,
-      "message":"user registered sucessfully"
-        });
+      "message":"user registered successfully"
+    });
   }
   });
 }
@@ -38,8 +36,7 @@ exports.register = function(req,res){
 exports.login = function(req, res){
   var username= req.body.username;
   var password = req.body.password;
-  var sql = "SELECT id, username FROM `users` WHERE `username`='"+username+"' and password = '"+password+"'"; 
-  console.log('login: ',username,password);
+  var sql = "SELECT id, username FROM `users` WHERE `username`='" + username + "' and password = '" + password+ "'";
   db.query(sql, function (error, results) {
     if(results.length) {
       res.send({
