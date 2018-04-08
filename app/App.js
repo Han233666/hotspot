@@ -3,7 +3,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
 import {StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
@@ -17,11 +18,24 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      signedIn: false,
     };
   }
 
+  onUpdate = (val) => {
+    this.setState({
+      signedIn: val
+    })
+  };
+
   render() {
-    return <Login />;
+    const { signedIn } = this.state;
+    if(signedIn) {
+      return <Tabs />;
+    }
+    else {
+      return <Login onUpdate={this.onUpdate}/>;
+    }
   }
 }
 

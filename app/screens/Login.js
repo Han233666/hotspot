@@ -20,33 +20,25 @@ export default class App extends Component {
   }
 
   signIn() {
-    const bodyInfo = {
+    const body = {
       username: this.state.username,
       password: this.state.password,
     }
     try {
       fetch("http://localhost:5000/api/login/", {
         method: "POST",
-        body: JSON.stringify(bodyInfo),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-      })
-      .then(response => {
-        Alert.alert(JSON.stringify(response));
-        if (response.ok) {
-          response.json().then((response) => {
-            try {
-              
-            } catch (error) {
-              Alert.alert('Error', 'Unable to Store Information');
-            }
-          })
-          .catch(error => alert("Unable to Retrieve JSON"));
+        body: JSON.stringify(body),
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        if(responseJson.ok) {
+          this.props.onUpdate(true);
         }
-        else{
-          Alert.alert('Error','Incorrect Email Address or Password');
+        else {
+          Alert.alert(responseJson.message);
         }
       })
     }
@@ -56,34 +48,21 @@ export default class App extends Component {
   }
 
   signUp() {
-    const bodyInfo = {
+    const body = {
       username: this.state.username,
       password: this.state.password,
     }
     try {
-      fetch("http://localhost:5000/api/register", {
+      fetch("http://localhost:5000/api/register/", {
         method: "POST",
-        body: JSON.stringify(bodyInfo),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-      })
-      .then(response => {
-        Alert.alert(JSON.stringify(response));
-        if (response.ok) {
-          response.json().then((response) => {
-            try {
-
-            } catch (error) {
-              Alert.alert('Error', 'Unable to Store Information');
-            }
-          })
-          .catch(error => alert("Unable to Retrieve JSON"));
-        }
-        else{
-          Alert.alert('Error','Incorrect Email Address or Password');
-        }
+        body: JSON.stringify(body),
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        Alert.alert(responseJson.message);
       })
     }
     catch (error) {

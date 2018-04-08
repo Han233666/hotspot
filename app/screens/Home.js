@@ -8,7 +8,9 @@ import {
 
 import Icon from 'react-native-vector-icons/Entypo';
 
-import { Header, Button } from 'react-native-elements'
+import { Header, Button } from 'react-native-elements';
+
+import { NavigationActions } from 'react-navigation';
 
 export default class App extends Component {
   render() {
