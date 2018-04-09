@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 
 import { Header, Button } from 'react-native-elements';
 
-import { NavigationActions } from 'react-navigation';
+// import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 
 export default class App extends Component {
   render() {
@@ -28,11 +28,17 @@ export default class App extends Component {
           buttonStyle={styles.button}
           icon={{name: 'circle-with-plus', type: 'entypo'}}
           title='CREATE HOTSPOT' />
-        <Button
-          raised
-          buttonStyle={styles.button}
-          icon={{name: 'location-pin', type: 'entypo'}}
-          title='FIND HOTSPOT' />
+        <View style={styles.map}>
+        {/* <MapView
+        provider={PROVIDER_GOOGLE} 
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        /> */}
+        </View>
       </View>
       </View>
     );
@@ -54,5 +60,12 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#ff5e57',
     margin: 10,
-  }
+  },
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
 });
