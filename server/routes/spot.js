@@ -6,13 +6,15 @@ var db = mysql.createConnection({
   user     : config.user,
   password : config.password,
   database : config.database,
+  insecureAuth : true,
 });
+console.log(config.host)
 
 db.connect(function(error){
   if(!error) {
     console.log("Connected to hotspots.");
   } else {
-    console.log("Error connecting to hotspots.");
+    console.log(error);
   }
 });
 

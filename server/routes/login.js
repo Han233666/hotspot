@@ -6,13 +6,14 @@ var db = mysql.createConnection({
   user     : config.user,
   password : config.password,
   database : config.database,
+  insecureAuth : true,
 });
 
 db.connect(function(error){
   if(!error) {
     console.log("Connected to users.");
   } else {
-    console.log("Error connecting to users.");
+    console.log(error);
   }
 });
 
