@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 import {
   Platform,
   StyleSheet,
@@ -81,13 +83,13 @@ const Tabs = TabNavigator({
   },
 }, {
   tabBarOptions: {
-    activeTintColor: '#ffc048',
-    inactiveTintColor: '#fff',
+    activeTintColor: '#000',
+    inactiveTintColor: '#bdc3c7',
     labelStyle: {
       fontSize: 12,
     },
     style: {
-      backgroundColor: '#ff5e57',
+      backgroundColor: '#fff',
       borderTopWidth: 0,
       height: (Platform.OS === 'ios') ? 48 : 52 //change tabBar height for OS
     },

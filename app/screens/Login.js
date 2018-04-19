@@ -10,7 +10,7 @@ import {
 import { Header,Button,FormLabel,FormInput } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
-export default class App extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ export default class App extends Component {
       password: this.state.password,
     }
     try {
-      fetch("http://localhost:5000/api/login/", {
+      fetch("http://167.99.104.42:5000/api/login/", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -53,7 +53,7 @@ export default class App extends Component {
       password: this.state.password,
     }
     try {
-      fetch("http://localhost:5000/api/register/", {
+      fetch("http://167.99.104.42:5000/api/register/", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -75,10 +75,10 @@ export default class App extends Component {
       <View style={styles.container}>
         <KeyboardAvoidingView behavior="position">
         <Text style={styles.title}>
-          Hotspot
+          HOTSPOT
         </Text>
           <View style={styles.form}>
-            <FormLabel labelStyle={{color:"#000"}}>Username</FormLabel>
+            <FormLabel labelStyle={{color:"#000"}}>USERNAME</FormLabel>
             <FormInput 
               inputStyle={{color:"#000"}} 
               containerStyle={styles.input} 
@@ -88,7 +88,7 @@ export default class App extends Component {
               ref={input => this.userinput = input} 
               onChangeText={(username) => {this.setState({username});}} autoCapitalize="none" 
             />
-            <FormLabel labelStyle={{color:"#000"}}>Password</FormLabel>
+            <FormLabel labelStyle={{color:"#000"}}>PASSWORD</FormLabel>
             <FormInput 
               inputStyle={{color:"#000"}} 
               containerStyle={styles.input} 
@@ -97,31 +97,17 @@ export default class App extends Component {
               onChangeText={(password) => {this.setState({password});}} secureTextEntry
             />
         <Button
-          title="Sign In"
+          title="SIGN IN"
           onPress={() => this.signIn()}
           textStyle={{ fontWeight: "700" }}
-          buttonStyle={{
-            backgroundColor: "#ff5e57",
-            width: 300,
-            height: 45,
-            borderColor: "transparent",
-            borderWidth: 0,
-            borderRadius: 5
-          }}
+          buttonStyle={styles.button}
           containerStyle={{ marginTop: 20 }}
         />
         <Button
-          title="Sign Up"
+          title="SIGN UP"
           onPress={() => this.signUp()}
           textStyle={{ fontWeight: "700" }}
-          buttonStyle={{
-            backgroundColor: "#ff5e57",
-            width: 300,
-            height: 45,
-            borderColor: "transparent",
-            borderWidth: 0,
-            borderRadius: 5
-          }}
+          buttonStyle={styles.button}
           containerStyle={{ marginTop: 20 }}
         />
         </View>
@@ -136,14 +122,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffdd59',
+    backgroundColor: '#ffffff',
+  },
+  button: {
+    backgroundColor: "#ff5e57",
+    width: 300,
+    height: 45,
+    marginTop: 20,
+    borderColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 5
   },
   title: {
     fontSize: 35,
     textAlign: 'center',
     fontWeight: "700",
-    color: '#ffffff',
-    margin: 10,
+    color: '#ff4757',
+    marginBottom: 40,
+    fontWeight: "900",
   },
   form: {
     flexDirection: 'column',

@@ -3,42 +3,65 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Modal,
+  Dimensions,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Entypo';
 
 import { Header, Button } from 'react-native-elements';
 
-// import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import Map from './Map';
+import Spot from './Spot'
 
-export default class App extends Component {
+export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      map: false,
+      spot: false,
+    };
+  }
+
+  setMapVisible(visible) {
+    this.setState({map: visible});
+  }
+
+  setSpotVisible(visible) {
+    this.setState({spot: visible});
+  }
+
   render() {
     return (
       <View style={styles.container}>
+        <Modal animationType={"slide"} visible={this.state.map} onRequestClose={() => {}}>
+          <Map closeMap={() => {this.setState({map: false})}} />
+        </Modal>
+        <Modal animationType={"slide"} visible={this.state.spot} onRequestClose={() => {}}>
+          <Spot closeSpot={() => {this.setState({spot: false})}} />
+        </Modal>
         <Header
           leftComponent={{ }}
-          centerComponent={{ text: 'Home', style: { color: '#fff', fontSize: 20 } }}
+          centerComponent={{ text: 'HOME', style: { color: '#fff', fontSize: 20, fontWeight: "900" } }}
           outerContainerStyles={{ backgroundColor: '#ff5e57', borderBottomWidth:0 }}
           rightComponent={{  }}
         />
-      <View style={styles.container}>
+      <View style={styles.group}>
         <Button
           raised
           buttonStyle={styles.button}
-          icon={{name: 'circle-with-plus', type: 'entypo'}}
-          title='CREATE HOTSPOT' />
-        <View style={styles.map}>
-        {/* <MapView
-        provider={PROVIDER_GOOGLE} 
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-        /> */}
-        </View>
+          textStyle={{fontSize: 25, fontWeight: "900"}}
+          icon={{name: 'circle-with-plus', type: 'entypo', size:25}}
+          onPress={()=>this.setSpotVisible(true)}
+          title='ADD HOTSPOT' />
+        <Button
+          raised
+          buttonStyle={styles.button}
+          textStyle={{fontSize: 25, fontWeight: "900"}}
+          icon={{name: 'compass', type: 'entypo', size:25}}
+          onPress={()=>this.setMapVisible(true)}
+          title='VIEW HOTSPOTS' />  
       </View>
       </View>
     );
@@ -48,7 +71,11 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffdd59',
+    backgroundColor: '#ffffff',
+  },
+  group: {
+    flex: 1,
+    alignItems:'center',
   },
   title: {
     fontSize: 35,
@@ -59,13 +86,13 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#ff5e57',
-    margin: 10,
+    marginTop: 5,
+    height: Dimensions.get('window').height*.4,
+    width: Dimensions.get('window').width*.98
   },
   map: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    flex:1,
+    width: 300,
+    height: 300,
   },
 });

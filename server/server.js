@@ -1,5 +1,6 @@
 var express = require("express");
 var login = require('./routes/login');
+var spot = require('./routes/spot');
 var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,6 +13,8 @@ app.use(function(req, res, next) {
 var router = express.Router();
 router.get('/', function(req, res) {});
 router.post('/register',login.register);
-router.post('/login',login.login)
+router.post('/login',login.login);
+router.post('/add',spot.add);
+router.post('/view',spot.view);
 app.use('/api', router);
 app.listen(5000);
