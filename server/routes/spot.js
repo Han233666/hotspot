@@ -8,7 +8,6 @@ var db = mysql.createConnection({
   database : config.database,
   insecureAuth : true,
 });
-console.log(config.host)
 
 db.connect(function(error){
   if(!error) {
@@ -33,27 +32,27 @@ exports.add = function(req,res){
     })
   } else{
     res.send({
-      "message":"Hotspot added successfully."
+      "message":"Hotspot added successfully.",
+      "ok":"ok"
     });
   }
   });
 }
 
 exports.view = function(req, res){
-  // var username= req.body.username;
-  // var password = req.body.password;
-  // var sql = "SELECT id, username FROM `users` WHERE `username`='" + username + "' and password = '" + password+ "'";
-  // db.query(sql, function (error, results) {
-  //   if(results.length) {
-  //     res.send({
-  //       "message":"login successful",
-  //       "ok":"ok"
-  //     })
-  //   }
-  //   else {
-  //     res.send({
-  //       "message":"wrong credentials",
-  //     })
-  //   }
-  // });
+  var sql = "SELECT id, username, title, description, latitude, longitude FROM `spots`";
+  db.query(sql, function (error, results) {
+    if(results.length) {
+      res.send({
+        "ok":"ok",
+        "message":"Hotspots retrieved.",
+        "results":results,
+      })
+    }
+    else {
+      res.send({
+        "message":"Unable to get Hotspots.",
+      })
+    }
+  });
 }

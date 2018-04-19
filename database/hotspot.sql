@@ -18,7 +18,7 @@ CREATE TABLE `spots` (
   `latitude` varchar(30) NOT NULL,
   `longitude` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` ( `username` )
+  UNIQUE KEY `id` ( `id` )
   ) ENGINE=MyISAM DEFAULT CHARSET = utf8;
 
 INSERT INTO `spots` (id,username,title,description,latitude,longitude) VALUES (1,'guy','better party','come party at the house','40.0025','-105.2428');

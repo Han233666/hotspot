@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text,Dimensions, } from 'react-native';
+import { 
+  View, 
+  AsyncStorage, 
+  Text, 
+  Dimensions,
+  Alert 
+} from 'react-native';
 import { Header, Button, FormLabel, FormInput } from 'react-native-elements';
+
+var config = require('../Config');
 
 export default class Spot extends Component {
   constructor(props) {
@@ -15,6 +23,7 @@ export default class Spot extends Component {
   }
 
   componentDidMount() {
+    AsyncStorage.getItem("username").then((value) => {this.setState({"username": value});}).done();
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
         latitude: position.coords.latitude,
@@ -39,7 +48,7 @@ export default class Spot extends Component {
       longitude: this.state.longitude,
     }
     try {
-      fetch("http://167.99.104.42:5000/api/add/", {
+      fetch("http://"+config.server+":5000/api/add/", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -49,7 +58,7 @@ export default class Spot extends Component {
       }).then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.ok) {
-          this.props.closeSpot;
+          this.props.closeSpot();
         }
         else {
           Alert.alert(responseJson.message);

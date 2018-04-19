@@ -4,17 +4,26 @@ import {
   Text,
   Dimensions, 
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 import { Header, Button } from 'react-native-elements';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
-let id = 0;
+
+var config = require('../Config');
+
+let id = 1;
 
 export default class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: "",
+      title: "",
+      description: "",
+      latitude: 40.0025,
+      longitude: -105.2428,
       region: {
         latitude: 40.0025,
         longitude: -105.2428,
@@ -23,22 +32,51 @@ export default class Map extends Component {
       },
       error: null,
       markers: [],
+      results: [],
     };
   }
 
-  onMapPress(e) {
-    this.setState({
-      markers: [
-        ...this.state.markers,
-        {
-          title: "gr9 party",
-          description: "this is a super chill, super relax place. address is 2402 fun ave",
-          coordinate: e.nativeEvent.coordinate,
-          key: id++,
-          color: '#ff5e57',
+  viewSpot() {
+    try {
+      fetch("http://"+config.server+":5000/api/view/", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
-      ],
-    });
+      }).then((response) => response.json())
+      .then((responseJson) => {
+        if(responseJson.ok) {
+          this.setState({results: responseJson.results});
+        }
+        else {
+          Alert.alert("Unable to retrieve hotspots.");
+        }
+      })
+    }
+    catch (error) {
+      Alert.alert('Cannot fetch data.');
+    }
+  }
+
+  onMapPress(e) {
+    // this.viewSpot();
+    // this.setState({
+    //   markers: [
+    //     ...this.state.markers,
+    //     {
+    //       title: "gr9 party",
+    //       description: "this is a super hi",
+    //       // coordinate: e.nativeEvent.coordinate,
+    //       coordinate: {
+    //         latitude: 40.0025,
+    //         longitude: -105.2428,
+    //       },
+    //       key: id++,
+    //       color: '#ff5e57',
+    //     },
+    //   ],
+    // });
   }
 
   componentDidMount() {
@@ -59,19 +97,10 @@ export default class Map extends Component {
       maximumAge: 1000 
       },
     );
+    this.viewSpot();
   }
     
   render() {
-    // const spots = [
-    //   {
-    //     coordinate: {
-    //       latitude: 40.0025,
-    //       longitude: -105.2428,
-    //     },
-    //     title: 'gr9 party',
-    //     description: "this is fun"
-    //   },
-    // ]
     return (
       <View style={styles.container}>
         <Header
@@ -86,18 +115,17 @@ export default class Map extends Component {
           initialRegion={this.state.region}
           onPress={(e) => this.onMapPress(e)}
         >
-        {this.state.markers.map((marker) => (
+        {this.state.results.map((marker) => (
           <Marker
-            title={marker.title}
-            description={marker.coordinate}
-            key={marker.key}
-            coordinate={marker.coordinate}
-            pinColor={marker.color}
+            title={marker.title + " by " + marker.username}
+            description={marker.description}
+            key={id++}
+            coordinate={{latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude)}}
+            pinColor='#ff5e57'
           />
         ))}
         </MapView>
         <TouchableOpacity
-            onPress={() => this.setState({ markers: [] })}
             style={styles.bubble}
           >
             <Text>Tap on a spot to see more details!</Text>

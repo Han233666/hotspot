@@ -5,10 +5,13 @@ import {
   Text,
   View,
   KeyboardAvoidingView,
-  Alert
+  Alert,
+  AsyncStorage,
 } from 'react-native';
 import { Header,Button,FormLabel,FormInput } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
+
+var config = require('../Config');
 
 export default class Login extends Component {
   constructor(props) {
@@ -25,7 +28,7 @@ export default class Login extends Component {
       password: this.state.password,
     }
     try {
-      fetch("http://167.99.104.42:5000/api/login/", {
+      fetch("http://"+config.server+":5000/api/login/", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -35,6 +38,7 @@ export default class Login extends Component {
       }).then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.ok) {
+          AsyncStorage.setItem("username",this.state.username);
           this.props.onUpdate(true);
         }
         else {
@@ -53,7 +57,7 @@ export default class Login extends Component {
       password: this.state.password,
     }
     try {
-      fetch("http://167.99.104.42:5000/api/register/", {
+      fetch("http://"+config.server+":5000/api/register/", {
         method: "POST",
         headers: {
           'Accept': 'application/json',

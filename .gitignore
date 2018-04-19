@@ -56,3 +56,4 @@ buck-out/
 *.jsbundle
 ios/Hotspot/Keys.plist
 server/routes/config.js
+app/Config.js
