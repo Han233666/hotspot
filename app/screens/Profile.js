@@ -14,7 +14,7 @@ export default class App extends Component {
     this.state = {
       first:'firstname',
       last:'lastname',
-      email:'email@email.com',
+      age: 'Age: 21',
     };
   }
 
@@ -32,15 +32,23 @@ export default class App extends Component {
           {this.state.first} {this.state.last}
         </Text>
         <Avatar 
-          large
+          xlarge
           rounded
-          source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"}}
+          icon={{name: 'user', type: 'entypo'}}
+          //source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"}}
           onPress={() => console.log("Works!")}
           activeOpacity={0.7}
         />
-        <Text style={styles.email}>
-          {this.state.email}
+        <Text style={styles.age}>
+          {this.state.age}
         </Text>
+        <Button
+          medium
+          raised
+          buttonStyle={styles.button}
+          icon={{name: 'pencil', type: 'entypo'}}
+          onPress={() => console.log("Works!")}
+          title='Edit My Profile' />
         </View>
       </View>
     );
@@ -56,19 +64,33 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#ffdd59',
+    //justifyContent: 'space-between',
+  },
+  containerStyle1: {
+    flex:1,
+    flexDirection: 'row',
+    //justifyContent: 'space-between',
+    alignItems: "baseline",
+    //justifyContent: 'space-between',
   },
   name: {
     fontSize: 35,
     textAlign: 'center',
     fontWeight: "700",
     color: '#ffffff',
-    margin: 10,
+    margin: 15,
   },
-  email: {
+  age: {
     fontSize: 25,
     textAlign: 'center',
     fontWeight: "400",
     color: '#ffffff',
+    margin: 15,
+  },
+  button: {
+    backgroundColor: '#ff5e57',
+    alignSelf: 'center',
+    position: 'absolute',
     margin: 10,
   },
 });
