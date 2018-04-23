@@ -39,6 +39,7 @@ export default class Login extends Component {
       .then((responseJson) => {
         if(responseJson.ok) {
           AsyncStorage.setItem("username",this.state.username);
+          // AsyncStorage.setItem("signedIn",true);
           this.props.onUpdate(true);
         }
         else {
