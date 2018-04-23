@@ -21,5 +21,5 @@ CREATE TABLE `spots` (
   UNIQUE KEY `id` ( `id` )
   ) ENGINE=MyISAM DEFAULT CHARSET = utf8;
 
-INSERT INTO `spots` (id,username,title,description,latitude,longitude) VALUES (1,'guy','better party','come party at the house','40.0025','-105.2428');
-INSERT INTO `spots` (id,username,title,description,latitude,longitude) VALUES (2,'connor','party','i have a fun party!','40.0192','-105.2772');
+INSERT INTO `spots` (id,username,title,description,latitude,longitude) VALUES (1,'guy','Birthday Party',"It's my birthday! Come give me presents.",'40.0025','-105.2428');
+INSERT INTO `spots` (id,username,title,description,latitude,longitude) VALUES (2,'connor','Pickup Soccer','Come play with us! Bring either a white or black shirt.','40.0192','-105.2772');
