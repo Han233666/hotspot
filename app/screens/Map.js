@@ -59,26 +59,6 @@ export default class Map extends Component {
     }
   }
 
-  onMapPress(e) {
-    // this.viewSpot();
-    // this.setState({
-    //   markers: [
-    //     ...this.state.markers,
-    //     {
-    //       title: "gr9 party",
-    //       description: "this is a super hi",
-    //       // coordinate: e.nativeEvent.coordinate,
-    //       coordinate: {
-    //         latitude: 40.0025,
-    //         longitude: -105.2428,
-    //       },
-    //       key: id++,
-    //       color: '#ff5e57',
-    //     },
-    //   ],
-    // });
-  }
-
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
@@ -113,7 +93,6 @@ export default class Map extends Component {
           style={styles.map} 
           provider={PROVIDER_GOOGLE} 
           initialRegion={this.state.region}
-          onPress={(e) => this.onMapPress(e)}
         >
         {this.state.results.map((marker) => (
           <Marker
