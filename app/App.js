@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
   View,
-  AsyncStorage
 } from 'react-native';
 
 import {StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
@@ -16,28 +15,30 @@ import Home from './screens/Home'
 import Profile from './screens/Profile'
 import Login from './screens/Login'
 
+import { isSignedIn } from "./Auth";
+
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       signedIn: false,
+      checkedSignIn: false
     };
   }
 
-  onUpdate = (val) => {
-    this.setState({
-      signedIn: val
-    })
-  };
+  componentWillMount() {
+    isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => alert(url));
+  }
 
   render() {
-    const { signedIn } = this.state;
-    if(signedIn) {
-      return <Tabs />;
+    const { checkedSignIn, signedIn } = this.state;
+    if (!checkedSignIn) {
+      return null;
     }
-    else {
-      return <Login onUpdate={this.onUpdate}/>;
-    }
+    const Layout = createRootNavigator(signedIn);
+    return <Layout />;
   }
 }
 
@@ -47,6 +48,10 @@ const HomeScreen = ({navigation, screenProps}) => (
 
 const ProfileScreen = ({navigation, screenProps}) => (
   <Profile navigation={navigation}/>
+);
+
+const LoginScreen = ({navigation, screenProps}) => (
+  <Login navigation={navigation}/>
 );
 
 const HomeTab = StackNavigator({
@@ -99,3 +104,25 @@ const Tabs = TabNavigator({
   tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom', //tabBar position bottom for android/iOS
 });
+
+const createRootNavigator = (signedIn = false) => {
+  return StackNavigator({
+    SignedIn: {
+      screen: Tabs,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    SignedOut: {
+      screen: Login,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  },{
+      headerMode: "none",
+      mode: "modal",
+      initialRouteName: signedIn ? "SignedIn" : "SignedOut",
+    }
+  );
+};

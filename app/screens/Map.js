@@ -46,7 +46,7 @@ export default class Map extends Component {
         },
       }).then((response) => response.json())
       .then((responseJson) => {
-        if(responseJson.ok) {
+        if(responseJson.success=='true') {
           this.setState({results: responseJson.results});
         }
         else {
