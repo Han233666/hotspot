@@ -55,5 +55,5 @@ buck-out/
 # Bundle artifact
 *.jsbundle
 ios/Hotspot/Keys.plist
-server/routes/config.js
 app/Config.js
+server/config/config.json
