@@ -39,11 +39,25 @@ exports.remove = function(req, res, next){
 }
 
 exports.view = function(req, res, next){
-  Spot.findAll({raw:true}).then(function (spot) {
-    res.send({results: spot, message: 'Spots found.', success: 'true'});
-  })
-  .catch(function(err){
-    console.log("Error:",err);
-    res.send({ message: 'Something went wrong when finding spots.', success: 'false' });
-  });
+  var data =
+  { username:req.body.username,
+  };
+  // if(data.username != null || data.username != '') {
+  //   Spot.findAll({where: {username:data.username}, raw:true}).then(function (spot) {
+  //     res.send({results: spot, message: 'Spots found.', success: 'true'});
+  //   })
+  //   .catch(function(err){
+  //     console.log("Error:",err);
+  //     res.send({ message: 'Something went wrong when finding spots.', success: 'false' });
+  //   });
+  // }
+  // else {
+    Spot.findAll({where: {username:req.body.username},raw:true}).then(function (spot) {
+      res.send({results: spot, message: 'Spots found.', success: 'true'});
+    })
+    .catch(function(err){
+      console.log("Error:",err);
+      res.send({ message: 'Something went wrong when finding spots.', success: 'false' });
+    });
+  // }
 }

@@ -30,10 +30,9 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
-    AsyncStorage.getItem("username").then((value) => {this.setState({"username": value});}).done();
+    AsyncStorage.getItem("username").then((value) => {this.setState({"username": value},this.loadSpots);}).done();
     AsyncStorage.getItem("firstName").then((value) => {this.setState({"firstName": value});}).done();
     AsyncStorage.getItem("lastName").then((value) => {this.setState({"lastName": value});}).done();
-    this.loadSpots();
   }
 
   removeSpot(item) {
@@ -63,6 +62,9 @@ export default class Profile extends Component {
   }
 
   loadSpots() {
+    const body = {
+      username: this.state.username,
+    }
     try {
       fetch("http://"+config.server+":5000/api/view/", {
         method: "POST",
@@ -70,6 +72,7 @@ export default class Profile extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
+        body: JSON.stringify(body),
       }).then((response) => response.json())
       .then((responseJson) => {
         if(responseJson.success=='true') {
