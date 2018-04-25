@@ -39,6 +39,7 @@ router.post('/login', auth.login);
 router.post('/logout', auth.logout);
 router.post('/add', map.add);
 router.post('/view',map.view);
+router.post('/remove',map.remove);
 app.use('/api',router);
 
 //Begin Server

@@ -54,7 +54,7 @@ export default class Profile extends Component {
         body: JSON.stringify(body),
       }).then((response) => response.json())
       .then((responseJson) => {
-        Alert.alert(responseJson.message);
+        this.loadSpots();
       })
     }
     catch (error) {
