@@ -7,22 +7,22 @@ module.exports = function(sequelize, Sequelize) {
     },
     username: {
       type: Sequelize.TEXT,
-      notEmpty: true
+      allowNull: false,
     },
     title: {
       type: Sequelize.STRING,
-      notEmpty: true
+      allowNull: false,
     },
     description: {
       type: Sequelize.TEXT,
     },
     latitude: {
       type: Sequelize.STRING,
-      notEmpty: true
+      allowNull: false,
     },
     longitude: {
       type: Sequelize.STRING,
-      notEmpty: true
+      allowNull: false,
     },
   });
   return Spot;
