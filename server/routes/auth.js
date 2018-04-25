@@ -9,7 +9,7 @@ exports.register = function(req, res, next) {
       return next(err) 
     }
     if (!user) {
-      return res.json({message: info.message})
+      return res.json({info})
     }
     res.json({user, info});
   })(req, res, next);
@@ -21,7 +21,7 @@ exports.login = function(req, res, next) {
       return next(err) 
     }
     if (!user) {
-      return res.json({message: info.message})
+      return res.json({info})
     }
     res.json({user, info});
   })(req, res, next);

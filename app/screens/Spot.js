@@ -57,7 +57,7 @@ export default class Spot extends Component {
         body: JSON.stringify(body),
       }).then((response) => response.json())
       .then((responseJson) => {
-        if(responseJson.ok) {
+        if(responseJson.success=='true') {
           this.props.closeSpot();
         }
         else {
@@ -75,7 +75,7 @@ export default class Spot extends Component {
         <View style={styles.container}>
           <Header
             leftComponent={{ icon: 'close', color: '#fff', onPress: this.props.closeSpot }}
-            centerComponent={{ text: 'ADD HOTSPOT', style: { color: '#fff', fontSize: 20, fontWeight: "900" }}}
+            centerComponent={{ text: 'ADD SPOT', style: { color: '#fff', fontSize: 20, fontWeight: "900" }}}
             outerContainerStyles={{ backgroundColor: '#ff5e57', borderBottomWidth:0 }}
             rightComponent={{  }}
           />

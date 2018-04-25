@@ -8,11 +8,11 @@ import {
   Alert,
   AsyncStorage,
   Modal,
-  TouchableHighlight
+  TouchableHighlight,
+  Image,
 } from 'react-native';
 import { Header,Button,FormLabel,FormInput } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
-
 import { NavigationActions } from 'react-navigation';
 
 import { USER_KEY } from "../Auth";
@@ -176,6 +176,7 @@ export default class Login extends Component {
           HOTSPOT
         </Text>
           <View style={styles.form}>
+          <Image style={styles.image} source={require('../../assets/images/hotspot.png')}/>
             <FormLabel labelStyle={{color:"#000"}}>USERNAME</FormLabel>
             <FormInput 
               inputStyle={{color:"#000"}} 
@@ -199,7 +200,6 @@ export default class Login extends Component {
           onPress={() => this.signIn()}
           textStyle={{ fontWeight: "700" }}
           buttonStyle={styles.button}
-          containerStyle={{ marginTop: 20 }}
         />
         <TouchableHighlight onPress={() => this.showSignUp(true)} underlayColor="#fff" >
               <Text style={styles.touchable}>Don't have an account yet? Sign Up.</Text>
@@ -223,7 +223,6 @@ const styles = StyleSheet.create({
     width: 300,
     height: 45,
     marginTop: 20,
-    borderColor: "transparent",
     borderWidth: 0,
     borderRadius: 5
   },
@@ -235,12 +234,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: "700",
     color: '#ff4757',
-    marginBottom: 40,
+    marginBottom: 5,
     fontWeight: "900",
   },
   form: {
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  image: {
+    margin: 10,
+    width: 70,
+    height: 98,
   },
   input: {
     maxWidth: 350,

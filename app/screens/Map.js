@@ -50,7 +50,7 @@ export default class Map extends Component {
           this.setState({results: responseJson.results});
         }
         else {
-          Alert.alert("Unable to retrieve hotspots.");
+          Alert.alert("Unable to retrieve spots.");
         }
       })
     }
@@ -85,7 +85,7 @@ export default class Map extends Component {
       <View style={styles.container}>
         <Header
           leftComponent={{ icon: 'close', color: '#fff', onPress: this.props.closeMap }}
-          centerComponent={{ text: 'HOTSPOTS', style: { color: '#fff', fontSize: 20, fontWeight: "900" }}}
+          centerComponent={{ text: 'SPOTS', style: { color: '#fff', fontSize: 20, fontWeight: "900" }}}
           outerContainerStyles={{ backgroundColor: '#ff5e57', borderBottomWidth:0 }}
           rightComponent={{  }}
         />

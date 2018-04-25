@@ -54,14 +54,14 @@ export default class Home extends Component {
           textStyle={{fontSize: 25, fontWeight: "900"}}
           icon={{name: 'circle-with-plus', type: 'entypo', size:25}}
           onPress={()=>this.setSpotVisible(true)}
-          title='ADD HOTSPOT' />
+          title='ADD SPOT' />
         <Button
           raised
           buttonStyle={styles.button}
           textStyle={{fontSize: 25, fontWeight: "900"}}
           icon={{name: 'compass', type: 'entypo', size:25}}
           onPress={()=>this.setMapVisible(true)}
-          title='VIEW HOTSPOTS' />  
+          title='VIEW SPOTS' />  
       </View>
       </View>
     );
