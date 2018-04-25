@@ -5,16 +5,16 @@ import {
   Text,
   View,
   AsyncStorage,
-  Alert
+  Alert,
+  ScrollView,
+  Dimensions
 } from 'react-native';
-import { Avatar,Header,Button,List,ListItem } from 'react-native-elements';
+import { Avatar,Header,Button,List,ListItem,Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 
 import { NavigationActions } from 'react-navigation';
 
-import { StackNavigator } from 'react-navigation';
-
-import { onSignOut, url } from "../Auth";
+import { onSignOut } from "../Auth";
 
 var config = require('../Config');
 
@@ -33,6 +33,9 @@ export default class Profile extends Component {
     AsyncStorage.getItem("username").then((value) => {this.setState({"username": value},this.loadSpots);}).done();
     AsyncStorage.getItem("firstName").then((value) => {this.setState({"firstName": value});}).done();
     AsyncStorage.getItem("lastName").then((value) => {this.setState({"lastName": value});}).done();
+    this.props.navigation.addListener('willFocus', ()=>{
+      this.loadSpots();
+    });
   }
 
   removeSpot(item) {
@@ -66,7 +69,7 @@ export default class Profile extends Component {
       username: this.state.username,
     }
     try {
-      fetch("http://"+config.server+":5000/api/view/", {
+      fetch("http://"+config.server+":5000/api/user/", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -102,25 +105,33 @@ export default class Profile extends Component {
             large
             rounded
             source={require('../../assets/images/hotspot_icon.png')}
-            containerStyle={{margin:15}}
+            containerStyle={{margin:10}}
           />
-          <Text style={{fontSize: 25, fontWeight: "800",marginBottom:10}}>{this.state.firstName} {this.state.lastName}</Text> 
-          <Text style={{fontSize: 15, fontWeight: "500"}}>{this.state.username}</Text> 
-      </View>
-      <List>
-              {
-                this.state.spots.map((item, i) => (
-                  <ListItem
-                    rightIcon={{name:'close',color:'#ff5e57'}}
-                    key={i}
-                    title={item.title}
-                    subtitle={item.description}
-                    onPressRightIcon={() => this.removeSpot(item)}
-                  />
-                ))
-              }
-            </List>
-            <Button rounded buttonStyle={styles.button} textStyle={{ fontWeight: "700" }} title='SIGN OUT' containerStyle={{ marginTop: 20 }} onPress={() => onSignOut().then(() => this.props.navigation.dispatch(NavigationActions.reset({ index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'SignedOut' })],})))}/>
+          <Text style={{fontSize: 25, fontWeight: "800",marginBottom:5}}>{this.state.firstName} {this.state.lastName}</Text> 
+          <Text style={{fontSize: 15, fontWeight: "500",marginBottom:15}}>{this.state.username}</Text> 
+          <Divider style={{ backgroundColor: '#bbb',marginBottom:15,width:Dimensions.get('window').width*.8 }} />
+        </View>
+        
+        <Text style={{fontSize: 20, fontWeight: "800",marginLeft:10}}>Your Spots</Text> 
+        <ScrollView contentContainerStyle={{}}>
+        <List containerStyle={{borderTopWidth:0}}>
+            {
+              this.state.spots.map((item, i) => (
+                <ListItem
+                  rightIcon={{name:'close',color:'#ff5e57'}}
+                  key={i}
+                  title={item.title}
+                  subtitle={item.description}
+                  onPressRightIcon={() => this.removeSpot(item)}
+                />
+              ))
+            }
+          </List>
+          <Text style={{textAlign:'center',fontWeight: "700",color:"#999"}}>{this.state.spots.length > 0 ? null:'NO SPOTS FOUND'}</Text>
+        </ScrollView>
+        <View style={styles.group}>
+        <Button rounded buttonStyle={styles.button} textStyle={{ fontWeight: "700" }} title='SIGN OUT' containerStyle={{ marginTop: 20 }} onPress={() => onSignOut().then(() => this.props.navigation.dispatch(NavigationActions.reset({ index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'SignedOut' })],})))}/>
+        </View>
       </View>
     );
   }
@@ -132,7 +143,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   group: {
-    flex: 1,
     alignItems:'center',
   },
   button: {
