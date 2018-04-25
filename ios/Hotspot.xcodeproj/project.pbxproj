@@ -1333,7 +1333,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.CSCI3308.Hotspot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.margalit.Hotspot;
 				PRODUCT_NAME = Hotspot;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1353,7 +1353,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.CSCI3308.Hotspot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.margalit.Hotspot;
 				PRODUCT_NAME = Hotspot;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1378,7 +1378,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.CSCI3308.Hotspot-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.margalit.Hotspot-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1405,7 +1405,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.CSCI3308.Hotspot-tvOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.margalit.Hotspot-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;

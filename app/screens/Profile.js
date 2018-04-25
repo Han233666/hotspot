@@ -7,7 +7,8 @@ import {
   AsyncStorage,
   Alert,
   ScrollView,
-  Dimensions
+  Dimensions,
+  ImageBackground
 } from 'react-native';
 import { Avatar,Header,Button,List,ListItem,Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -93,7 +94,7 @@ export default class Profile extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ImageBackground source={require('../../assets/images/profile_bg.png')} style={styles.backgroundImage}>
         <Header
           leftComponent={{ }}
           centerComponent={{ text: 'PROFILE', style: { color: '#fff', fontSize: 20, fontWeight: "900" } }}
@@ -105,10 +106,10 @@ export default class Profile extends Component {
             large
             rounded
             source={require('../../assets/images/hotspot_icon.png')}
-            containerStyle={{margin:10}}
+            containerStyle={{margin:10, marginTop:15}}
           />
           <Text style={{fontSize: 25, fontWeight: "800",marginBottom:5}}>{this.state.firstName} {this.state.lastName}</Text> 
-          <Text style={{fontSize: 15, fontWeight: "500",marginBottom:15}}>{this.state.username}</Text> 
+          <Text style={{fontSize: 15, fontWeight: "500",marginBottom:15}}>@{this.state.username}</Text> 
           <Divider style={{ backgroundColor: '#bbb',marginBottom:15,width:Dimensions.get('window').width*.8 }} />
         </View>
         
@@ -131,16 +132,17 @@ export default class Profile extends Component {
         </ScrollView>
         <View style={styles.group}>
         <Button rounded buttonStyle={styles.button} textStyle={{ fontWeight: "700" }} title='SIGN OUT' containerStyle={{ marginTop: 20 }} onPress={() => onSignOut().then(() => this.props.navigation.dispatch(NavigationActions.reset({ index: 0, key: null, actions: [NavigationActions.navigate({ routeName: 'SignedOut' })],})))}/>
+        <Text/>
+        <Text/>
         </View>
-      </View>
+      </ImageBackground>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundImage:{ 
     flex: 1,
-    backgroundColor: '#ffffff',
   },
   group: {
     alignItems:'center',
