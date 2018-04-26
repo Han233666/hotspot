@@ -3,6 +3,19 @@ let models = require('../models');
 let Spot = models.spot;
 
 exports.add = function(req, res, next){
+  if(req.body.latitude.length === 0 || req.body.longitude.length === 0) {
+    console.log('Object missing');
+    res.send({ message: 'Location unknown.', success: 'false' });
+  }
+  else if(req.body.username.length === 0) {
+    console.log('Object missing');
+    res.send({ message: 'User unknown.', success: 'false' });
+  }
+  else if(req.body.title.length === 0 || req.body.description.length === 0) {
+    console.log('Object missing');
+    res.send({ message: 'Title and/or description unknown.', success: 'false' });
+  }
+  else {
   var data =
   { username:req.body.username,
     title:req.body.title,
@@ -19,6 +32,7 @@ exports.add = function(req, res, next){
     console.log("Error:",err);
     res.send({ message: 'Something went wrong when adding spot.', success: 'false' });
   });
+}
 }
 
 exports.remove = function(req, res, next){
